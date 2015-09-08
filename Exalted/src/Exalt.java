@@ -190,6 +190,7 @@ public class Exalt
 		
 		//Weapons
 		///Class this
+		///GAAAAH
 		
 		totalExperience = 0;
 		availableExperience = totalExperience;
