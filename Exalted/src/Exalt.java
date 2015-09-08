@@ -8,20 +8,20 @@ public class Exalt
 	String anima;
 	
 	//Attributes
-	///Physical
-	int strength;
-	int dexterity;
-	int stamina;
-	
-	////Mental
-	int intelligence;
-	int wits;
-	int perception;
-	
-	////Social
-	int charisma;
-	int manipulation;
-	int appearance;
+		///Physical
+		int strength;
+		int dexterity;
+		int stamina;
+		
+		////Mental
+		int intelligence;
+		int wits;
+		int perception;
+		
+		////Social
+		int charisma;
+		int manipulation;
+		int appearance;
 	
 	//Abilities
 	int[] abilities = new int[30];
@@ -63,20 +63,19 @@ public class Exalt
 	//tempted to do another class for this too
 	
 	//Other things
-	////Health
-	int zeroes;
-	int ones;
-	int twos;
-	int fours;
-	int incap;
-	int dying;
-	
-	int currZeroes;
-	int currOnes;
-	int currTwos;
-	int currFours;
-	int currIncap;
-	int currDying;
+	////Health - Current health starts at max health, and decreases as we take damage.
+	////cont.    *Points are the point at which we transition. If we had 10 health, three of which were 
+	////cont.    minus 0s, then zeroPoint would be 8. (The last health level that's a zero.) If two were
+	////cont.    minus 1s, then onePoint would be 6. (the last health level that's a 1.)
+	int maxHealth;
+	int currHealth;
+	int zeroPoint;
+	int onePoint;
+	int twoPoint;
+	int threePoint;
+	int fourPoint;
+	int incapPoint;
+	int dyingPoint;
 	
 	int joinBattle;
 	
@@ -171,39 +170,19 @@ public class Exalt
 		
 		//Other things
 		////Health
-		zeroes = 1;
-		ones = 2;
-		twos = 2;
-		fours = 1;
-		incap = 1;
-		dying = stamina;
+		maxHealth  = 7;
+		zeroPoint  = 7;
+		onePoint   = 5;
+		twoPoint   = 3;
+		fourPoint  = 2;
+		incapPoint = 1;
+		dyingPoint = 0;
 		
-		currZeroes = zeroes;
-		currOnes = ones;
-		currTwos = twos;
-		currFours = fours;
-		currIncap = incap;
-		currDying = dying;
-		
-		
-		joinBattle = wits + abilities[2]; //Wits + Awareness
+		currHealth = 7;
 		
 		//Armor
 		///Class this
-		
-		//Soaks
-		bashingSoak = stamina;
-		lethalSoak = stamina/2;
-		aggrivatedSoak = 0;
-		bHardness = 0;
-		lHardness = 0;
-		aHardness = 0;
-		
-		dodgeDV = (dexterity + abilities[10] + essence)/2;					//(Dex + Dodge + Essence)/2
-		parryDV = dexterity + abilities[18]; //Plus weapon defense			//Dex + Melee + Weapon Defense
-		mentalDodge = (willpower + abilities[11] + essence)/2;			//(Willpower + integrity + essence)/2
-		mentalParry = charisma + abilities[21];							//Many options, go with highest, this case uses Charisma + Presence
-		
+			
 		//Artifacts
 		///Just names for now
 		artifacts = new String[1];
@@ -215,6 +194,30 @@ public class Exalt
 		totalExperience = 0;
 		availableExperience = totalExperience;
 		bonusPoints = 0;
+		
+		doMath();
+	}
+	
+	//Calculates calculatable values
+	public void doMath()
+	{
+		basePersonalMotes = (essence *3) + willpower ;
+		basePeripheralMotes = (essence *7) + willpower + valor + temperance + compassion + conviction;
+		
+		joinBattle = wits + abilities[2]; //Wits + Awareness
+		
+		//Armor
+		///Class this
+		
+		//Soaks
+		bashingSoak = stamina;
+		lethalSoak = stamina/2;
+		
+		dodgeDV = (dexterity + abilities[10] + essence)/2;					//(Dex + Dodge + Essence)/2
+		parryDV = dexterity + abilities[18]; //Plus weapon defense			//Dex + Melee + Weapon Defense
+		mentalDodge = (willpower + abilities[11] + essence)/2;			//(Willpower + integrity + essence)/2
+		mentalParry = charisma + abilities[21];							//Many options, go with highest, this case uses Charisma + Presence
+		
 	}
 	
 	
