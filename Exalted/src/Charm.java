@@ -61,10 +61,36 @@ public class Charm
 		System.out.println(flavorText);
 		System.out.println();
 		System.out.println(keywords[0]);
+		
+		if(hasPrereq)
+		{
+			System.out.print("Prerequisits: ");
+			
+			for(int i = 0; i < prerequisites.length; i++)
+			{
+				if(prerequisites[i] != null)
+				{
+					System.out.print(prerequisites[i]);
+					
+					if(i < prerequisites.length - 1)
+					{
+						System.out.print(", ");
+					}
+				}
+			}
+			
+			System.out.println();
+		}
+		
 		System.out.print("Keywords: ");
 		for(int i = 1; i < keywords.length; i++)
 		{
 			System.out.print(keywords[i]);
+			
+			if(i < keywords.length - 1)
+			{
+				System.out.print(", ");
+			}
 		}
 		System.out.println();
 	}

@@ -1,0 +1,34 @@
+What Happens Right Now:
+
+- Can create Custom Exalts
+- Can create custom Charms
+- Can add Charms to Exalts
+- User can explore charms further
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+What is Clunky:
+
+- Making/Adding charms on Exalts is clunky
+--Possibly implementing a Charm "Library" could help
+- Typing the whole name of some charms is dumb
+- creating exalts is hard due to amount of numbers required
+- Printed character sheet can get lengthy
+--Console is not permenant, look into GUI
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+What comes next:
+
+- Get charms to affect Exalts stats
+-- This mostly affects permenant charms
+
+- print health in a nice way
+- handle combat
+-- calculate soaks and weapons damages
+
+- keep working on charm implementation
+--including setup of MA and Sorcery
+--- potential requirement for inheritance
+
+- optimize AKA make this easier on myself
