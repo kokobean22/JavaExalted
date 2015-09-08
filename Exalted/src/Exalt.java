@@ -25,9 +25,9 @@ public class Exalt
 	
 	//Abilities
 	int[] abilities = new int[30];
-	String[] abilityNames = {"archery", "athletics", "awareness", "bureaucracy", "craftAir", "craftWater", "craftFire", "craftEarth", "craftWood",
-	 "craftOther", "dodge", "integrity", "investigation", "larceny", "linguistics", "lore", "martialArts", "medicine", "melee", "occult", "performance",
-	 "presence", "resistance", "ride", "sail", "socialize", "stealth", "survival", "thrown", "war"};
+	String[] abilityNames = {"Archery", "Athletics", "Awareness", "Bureaucracy", "Craft(Air)", "Craft(Water)", "Craft(Fire)", "Craft(Earth)", "Craft(Wood)",
+	 "Craft(Other)", "Dodge", "Integrity", "Investigation", "Larceny", "Linguistics", "Lore", "Martial Arts", "Medicine", "Melee", "Occult", "Performance",
+	 "Presence", "Resistance", "Ride", "Sail", "Socialize", "Stealth", "Survival", "Thrown", "War"};
 	
 	//Advantages
 	int willpower;
@@ -52,6 +52,7 @@ public class Exalt
 	
 	//Charms
 	///Will require a separate class, likely an array of sorts
+	Charm[] charms = new Charm[100];
 	
 	//Martial Arts
 	///See Charms
@@ -221,6 +222,88 @@ public class Exalt
 		
 	}
 	
+	public Exalt(String n, String type, String kaste, int str, int dex, int sta, int cha, int manip, int looks, int per, int intel, int wit, int[] abiliti, int will, int ess, int val, int comp, int conv, int temp, String vFlaw)
+	{
+		name = n;
+		exaltType = type;
+		caste = kaste;
+		strength = str;
+		dexterity = dex;
+		stamina = sta;
+		charisma = cha;
+		manipulation = manip;
+		appearance = looks;
+		perception = per;
+		intelligence = intel;
+		wits = wit;
+		for(int i = 0; i < abilities.length; i++)
+		{
+			abilities[i] = abiliti[i];
+		}
+		willpower = will;
+		essence = ess;
+		valor = val;
+		conviction = conv;
+		compassion = comp;
+		temperance = temp;
+		
+		tempWillpower = willpower;
+		limit = 0;
+		//Mote calculation based on Solar exalt
+		basePersonalMotes = (essence*3) + willpower;
+		currPersonalMotes = basePersonalMotes;
+		basePeripheralMotes = (essence*7) + willpower + (conviction + temperance + compassion + valor);
+		currPeripheralMotes = basePeripheralMotes;
+		
+		virtueFlaw = vFlaw;
+		
+		zeroes = 1;
+		ones = 2;
+		twos = 2;
+		fours = 1;
+		incap = 1;
+		dying = stamina;
+		
+		currZeroes = zeroes;
+		currOnes = ones;
+		currTwos = twos;
+		currFours = fours;
+		currIncap = incap;
+		currDying = dying;
+		
+		
+		joinBattle = wits + abilities[2]; //Wits + Awareness
+		
+		//Armor
+		///Class this
+		
+		//Soaks
+		bashingSoak = stamina;
+		lethalSoak = stamina/2;
+		aggrivatedSoak = 0;
+		bHardness = 0;
+		lHardness = 0;
+		aHardness = 0;
+		
+		dodgeDV = (dexterity + abilities[10] + essence)/2;					//(Dex + Dodge + Essence)/2
+		parryDV = dexterity + abilities[18]; //Plus weapon defense			//Dex + Melee + Weapon Defense
+		mentalDodge = (willpower + abilities[11] + essence)/2;				//(Willpower + integrity + essence)/2
+		mentalParry = charisma + abilities[21];								//Many options, go with highest, this case uses Charisma + Presence
+		
+		//Artifacts
+		///Just names for now
+		artifacts = new String[1];
+		artifacts[0] = "Sad Broken Soulsteel Tiara";
+		
+		//Weapons
+		///Class this
+		
+		totalExperience = 0;
+		availableExperience = totalExperience;
+		bonusPoints = 0;
+		
+	}
+	
 	
 	//Print the entire character sheet
 	//Note: Ignores Abilities at a skill level of 0
@@ -272,6 +355,22 @@ public class Exalt
 		}
 		
 		System.out.println();
+		
+		//Charms!
+		if(charms[0] != null)
+		{
+			for(int i = 0; i < charms.length; i++)
+			{
+				if(charms[i] == null)
+				{
+					break;
+				}
+				else
+				{
+					System.out.println(charms[i].name + " : " + charms[i].ability);
+				}
+			}
+		}
 	}
 	
 	public void printDots(String what, int num)
